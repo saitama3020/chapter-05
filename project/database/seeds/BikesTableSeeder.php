@@ -23,6 +23,8 @@ class BikesTableSeeder extends Seeder
                 'year' => $obj->year,
                 'mods' => $obj->mods,
                 'picture' => $obj->picture,
+                'user_id' => $obj->user_id,
+                'builder_id' => $obj->builder_id
             ));
         }
     }

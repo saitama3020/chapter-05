@@ -34,7 +34,13 @@ use Illuminate\Database\Eloquent\Model;
  * type="string",
  * description="Bike image URL",
  * example="http://www.sample.com/my.bike.jpg"
- * )
+ * ),
+ * @SWG\Property(
+ * property="builder_id",
+ * type="integer",
+ * description="id to associate a bike with it's builder",
+ * example="1"
+ * ),
  * )
  */
 
@@ -46,11 +52,13 @@ class Bike extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'make',
         'model',
         'year',
         'mods',
-        'picture'
+        'picture',
+        'builder_id'
     ];
 
     public function builder() {
