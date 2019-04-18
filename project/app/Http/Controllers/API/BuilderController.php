@@ -79,16 +79,38 @@ class BuilderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id\Get(
-     * path="/api/builders/{id}",
-     * )
+     * @param int $id 
      * @return \Illuminate\Http\Response
      * 
-     * @SWG
+     * @SWG\Get(
+     * path="/api/builders/{id}",
+     * summary="Get Builder by Id",
+     * @SWG\Parameter(
+     * name="id",
+     * in="path",
+     * required="true",
+     * type="integer",
+     * description="Display the specified Builder by id."
+     * ),
+     * @SWG\Response(
+     * response="200",
+     * description="Success: Return the Builder",
+     * @SWG\Schema(ref="#/definition/Builder"
+     * ),
+     * ),
+     * @SWG\Response(
+     * response="404",
+     * description="Not Found"
+     * ),
+     * @SWG\Response(
+     * response="405",
+     * description="Invalid HTTP Method"
+     * )
+     * )
      */
     public function show($id)
     {
-        //
+        $showBuilderById = Builder::with('Bike')->findOrFail($id);
     }
 
     /**
@@ -97,10 +119,48 @@ class BuilderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * @SWG\Put(
+     * path="/api/builders/{id},
+     * tags={"builders"},
+     * summary="Update Builder",
+     * @SWG\Parameter(
+     * name="id",
+     * in="path",
+     * required="true",
+     * type="integer",
+     * description="Update the specified Builder by id.",
+     * ),
+     * @SWG\Parameter(
+     *  name="body",
+     *  in="body",
+     *  required="true",
+     *  @SWG\Schema(ref="#/definitions/Builder"),
+     *  description="Json format",
+     * ),
+     * @SWG\Response(
+     *  response="200",
+     *  description="Success: Return the Builder updated",
+     *  @SWG\Schema(ref="#/definition/Builder"),
+     * ),
+     * @SWG\Response(
+     * response="422",
+     * description="Missing mandatory field"
+     * ),
+     * @SWG\Response(
+     * response="404",
+     * description="Not found",
+     * ),
+     * @SWG\Response(
+     * response="405",
+     * description="Invalid HTTP Method"),
+     * )
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateBuilderById = Builder::findOrFail($id);
+        $updateBuilderById->update($request->all());
+        return $updateBuilderById;
     }
 
     /**
@@ -108,9 +168,32 @@ class BuilderController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * @SWG\Delete(
+     * path="/api/builders/{id}",
+     * tags={"Builders"},
+     * summary="Delete Builder",
+     * description="Delete the specified Builder by id",
+     * @SWG\Parameter(
+     * description="Builder id to delete",
+     * in="path",
+     * required="true",
+     * type="integer"m
+     * format="int64",
+     * ),
+     * @SWG\Response(
+     * response="405",
+     * description="Invalid HTTP Method",
+     * ),
+     * @SWG\Response(
+     *  response="204",
+     *  description="Success: successful deleted"
+     * ),
+     * )
      */
     public function destroy($id)
     {
-        //
+        $deleteBuilderById = Builder::find($id)->delete();
+        return response()->json([], 204);
     }
 }
