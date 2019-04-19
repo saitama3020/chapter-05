@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Item;
+use Validator;
 
 class ItemController extends Controller
 {
@@ -67,7 +68,17 @@ class ItemController extends Controller
      * )
      */
     public function store(Request $request)
-    {
+    {   
+        $validator = Validator::make($request->all(),
+        [
+            'name' => 'required',
+            'company' => 'required',
+            'bike_id' => 'required'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json($validator->errors(), 422);
+        }
         $createItem = Item::create($request->all());
         return $createItem;
     }
@@ -147,7 +158,16 @@ class ItemController extends Controller
      * )
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $validator = Validate::make($request->all(), [
+            'name' => 'required',
+            'company' => 'required',
+            'bike_id' => 'required'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json($validator->errors(), 422);
+        }
         $updateItemById = Item::findOrFail($id);
         $updateItemById->update($request->all());
         return $updateItemById;

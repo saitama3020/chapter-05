@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bike;
+use Validator;
 
 class BikeController extends Controller
 {
@@ -66,7 +67,18 @@ class BikeController extends Controller
      * )
      */
     public function store(Request $request)
-    {
+    {   
+        $validator = Validator::make($request->all(), [
+            'make' => 'required',
+            'model' => 'required',
+            'year' => 'required',
+            'mods' => 'required',
+            'builder_id' => 'required'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json($validator->errors(), 422);
+        }
         $createBike = Bike::create($request->all());
         return $createBike;
     }
@@ -145,7 +157,18 @@ class BikeController extends Controller
      * )
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $validator = Validator::make($request->all(), [
+            'make' => 'required',
+            'model' => 'required',
+            'year' => 'required',
+            'mods' => 'required',
+            'builder_id' => 'required'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json($validator->errors(), 422);
+        }
         $updateBikeById = Bike::findOrFail($id);
         $updateBikeById->update($request->all());
         return $updateBikeById;
