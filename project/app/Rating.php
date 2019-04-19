@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @SWG\Definition(
- * difinition="Rating",
+ * definition="Rating",
  * required={"bike_id", "user_id", "rating"},
  * @SWG\Property(
  * property="bike_id",

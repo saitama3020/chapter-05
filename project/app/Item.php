@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @SWG\Definition(
- * definition="Item"
+ * definition="Item",
  * required={"type", "name", "company"},
  * @SWG\Property(
  * property="type",

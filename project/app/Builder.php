@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @SWG\Definition(
- * definition="Builder"
+ * definition="Builder",
  * required={"name", "description", "location"},
  * @SWG\Property(
  * property="name",
@@ -24,7 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * property="location",
  * type="string",
  * description="Texas/USA",
- * example="Austin, Texas"),
+ * example="Austin, Texas"
+ * ),
  * )
  */
 

@@ -48,7 +48,7 @@ class BuilderController extends Controller
      * @SWG\Parameter(
      * name="body",
      * in="body",
-     * required="true",
+     * required=true,
      * @SWG\Schema(ref="#/definitions/Builder"),
      * description="Json Format"
      * ),
@@ -84,18 +84,19 @@ class BuilderController extends Controller
      * 
      * @SWG\Get(
      * path="/api/builders/{id}",
+     * tags={"Builders"},
      * summary="Get Builder by Id",
      * @SWG\Parameter(
      * name="id",
      * in="path",
-     * required="true",
+     * required=true,
      * type="integer",
      * description="Display the specified Builder by id."
      * ),
      * @SWG\Response(
      * response="200",
      * description="Success: Return the Builder",
-     * @SWG\Schema(ref="#/definition/Builder"
+     * @SWG\Schema(ref="#/definitions/Builder"
      * ),
      * ),
      * @SWG\Response(
@@ -121,27 +122,27 @@ class BuilderController extends Controller
      * @return \Illuminate\Http\Response
      * 
      * @SWG\Put(
-     * path="/api/builders/{id},
-     * tags={"builders"},
+     * path="/api/builders/{id}",
+     * tags={"Builders"},
      * summary="Update Builder",
      * @SWG\Parameter(
      * name="id",
      * in="path",
-     * required="true",
+     * required=true,
      * type="integer",
      * description="Update the specified Builder by id.",
      * ),
      * @SWG\Parameter(
      *  name="body",
      *  in="body",
-     *  required="true",
+     *  required=true,
      *  @SWG\Schema(ref="#/definitions/Builder"),
      *  description="Json format",
      * ),
      * @SWG\Response(
      *  response="200",
      *  description="Success: Return the Builder updated",
-     *  @SWG\Schema(ref="#/definition/Builder"),
+     *  @SWG\Schema(ref="#/definitions/Builder"),
      * ),
      * @SWG\Response(
      * response="422",
@@ -175,10 +176,11 @@ class BuilderController extends Controller
      * summary="Delete Builder",
      * description="Delete the specified Builder by id",
      * @SWG\Parameter(
+     * name="id",
      * description="Builder id to delete",
      * in="path",
-     * required="true",
-     * type="integer"m
+     * required=true,
+     * type="integer",
      * format="int64",
      * ),
      * @SWG\Response(
