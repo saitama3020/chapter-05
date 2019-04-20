@@ -8,7 +8,16 @@ use App\Bike;
 use Validator;
 
 class BikeController extends Controller
-{
+{   
+    /**
+     * Protect update and delete methods, only for authenticated users.
+     * 
+     * @return Unauthorized
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['index']);
+    }
     /**
      * Display a listing of the resource.
      *

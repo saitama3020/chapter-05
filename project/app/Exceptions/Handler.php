@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
         {
             return response()->json(['error' => 'Method not Allowed'], 405);
         }
-        if ($exception instanceof UnauthorizedExceptionHttpException) {
+        if ($exception instanceof UnauthorizedHttpException) {
             return response()->json(['error' => 'Token not provided'], 401);
         }
         if($exception instanceof JWTException)

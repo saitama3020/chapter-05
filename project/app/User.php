@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 /**
@@ -23,7 +24,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * example="john.conor@terminator.com"
  * ),
  * @SWG\Property(
- * property="pawwsord",
+ * property="password",
  * type="string",
  * description="A very secure password",
  * example="123456"
@@ -31,7 +32,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * )
  */
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -52,8 +53,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    protected function bikes()
+    
+    /**
+     * Get JSON WEB TOKEN methods.
+     * 
+     * @var array
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+    /**
+     * Relationship
+     * 
+     * @var string
+     */
+    public function bikes()
     {
         return hasMany('App\Bike');
     }
+
 }
